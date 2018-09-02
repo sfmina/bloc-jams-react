@@ -26,3 +26,28 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.ion-md-play {
+  display:none;
+}
+
+.song:hover .ion-md-play {
+  display:inline-block;
+}
+
+.ion-md-pause {
+  display:inline-block;
+}
+
+.show {
+  display:inline-block;
+}
+
+
+.hide {
+  display:none;
+}
+
+.song:hover .show {
+  display:none;
+}

@@ -34,15 +34,40 @@ import albumData from './../data/albums';
  		this.setState({ currentSong: song });
  	}
 
- 	handleSongClick(song) {
- 		const isSameSong = this.state.currentSong === song;
- 		if (this.state.isPlaying && isSameSong) {
- 			this.pause();
- 		} else {
- 			if (!isSameSong) {this.setSong(song);}
- 			this.play();
- 		}
- 	}
+   handleSongClick(song) {
+     const isSameSong = this.state.currentSong === song;
+     if (this.state.isPlaying && isSameSong) {
+       this.pause();
+     } else {
+       if (!isSameSong) { this.setSong(song); }     
+       this.play();
+     }
+   }
+
+   setSongClass(song) {
+     const isSameSong = this.state.currentSong === song;
+     if (this.state.isPlaying && isSameSong) {
+       return 'ion-md-pause';
+     } else {
+       if (!isSameSong) {    
+       return 'ion-md-play';
+     } 
+      return 'ion-md-play';
+     
+   }}
+
+   setIndexClass(song) {
+     const isSameSong = this.state.currentSong === song;
+     if (this.state.isPlaying && isSameSong) {
+       return 'hide';
+     } else {
+       if (!isSameSong) {    
+       return 'show';
+     }
+     }
+     return 'show';
+   }
+
 
    render() {
      return (
@@ -57,13 +82,22 @@ import albumData from './../data/albums';
          </section>
           <table id="song-list">
            <colgroup>
+           <span></span>
              <col id="song-number-column" />
              <col id="song-title-column" />
              <col id="song-duration-column" />
            </colgroup>  
            <tbody>
            {this.state.album.songs.map( (song, index) => 
-           	<tr className='song' key={index} onClick={ () => this.handleSongClick(song)}>{index + 1} {song.title}: {song.duration} seconds</tr>)}
+           	<tr className='song' 
+              key={index} 
+              onClick={ () => this.handleSongClick(song)} >
+                
+                <span className={this.setSongClass(song)} ></span>
+
+                <span className={this.setIndexClass(song)} >{index + 1}</span>
+              
+                {song.title}: {song.duration} seconds</tr>)}
           
            
            </tbody>
