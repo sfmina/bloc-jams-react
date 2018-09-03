@@ -10,6 +10,7 @@ import albumData from './../data/albums';
  	});
 
  	this.state = {
+<<<<<<< HEAD
  		album: album,
  		currentSong: album.songs[0],
  		isPlaying: false
@@ -33,6 +34,10 @@ import albumData from './../data/albums';
  		this.audioElement.src = song.audioSrc;
  		this.setState({ currentSong: song });
  	}
+=======
+ 		album: album
+ 	};}
+>>>>>>> assignment-react-album-revise
 
    handleSongClick(song) {
      const isSameSong = this.state.currentSong === song;
@@ -74,6 +79,7 @@ import albumData from './../data/albums';
        <section className="album">
          <section id="album-info">
            <img id="album-cover-art" src={this.state.album.albumCover} alt={this.state.album.title}/>
+<<<<<<< HEAD
            <div className="album-details">
              <h1 id="album-title">{this.state.album.title}</h1>
              <h2 className="artist">{this.state.album.artist}</h2>
@@ -101,10 +107,27 @@ import albumData from './../data/albums';
           
            
            </tbody>
+=======
+             <div className="album-details">
+               <h1 id="album-title">{this.state.album.title}</h1>
+               <h2 className="artist">{this.state.album.artist}</h2>
+               <div id="release-info">{this.state.album.releaseInfo}</div>
+             </div>
+         </section>
+          <table id="song-list">
+             <colgroup>
+               <col id="song-number-column"/>
+               <col id="song-title-column"/>
+               <col id="song-duration-column"/>
+             </colgroup>  
+             <tbody>
+             <tr>
+              {this.state.album.songs.map((song,index)=> <td key={index}> {index+1} {song.title} {song.duration} seconds</td>)}
+              </tr>
+             </tbody>
+>>>>>>> assignment-react-album-revise
          </table>
          </section>
-     );
-   }
- }
+     );}}
 
 export default Album;
