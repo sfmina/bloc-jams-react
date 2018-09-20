@@ -28,7 +28,7 @@
 }
 
 .ion-md-play {
-  display:none;
+  display:inline-block;
 }
 
 .song:hover .ion-md-play {
