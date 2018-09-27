@@ -13,6 +13,8 @@ import PlayerBar from './PlayerBar';
   this.state = {
     album: album,
     currentSong: album.songs[0],
+    currentTime: 0,
+    duration: album.songs[0].duration,
     isPlaying: false
   };
 
@@ -80,6 +82,9 @@ import PlayerBar from './PlayerBar';
    handleNextClick() {
     const currentIndex =  this.state.album.songs.findIndex(song => this.state.currentSong === song);
     const newIndex = Math.max(0, currentIndex + 1);
+    if (newIndex === 5) {
+      return 1;
+    }
     const newSong = this.state.album.songs[newIndex];
     this.setSong(newSong);
     this.play();
@@ -99,22 +104,20 @@ import PlayerBar from './PlayerBar';
          </section>
           <table id="song-list">
            <colgroup>
-           <span></span>
              <col id="song-number-column" />
              <col id="song-title-column" />
              <col id="song-duration-column" />
            </colgroup>  
-           <tbody>
-           {this.state.album.songs.map( (song, index) => 
+           <tbody>{this.state.album.songs.map( (song, index) => 
             <tr className='song' 
               key={index} 
               onClick={ () => this.handleSongClick(song)} >
                 
-                <span className={this.setSongClass(song)} ></span>
+                <td className={this.setSongClass(song)} ></td>
 
-                <span className={this.setIndexClass(song)} >{index + 1}</span>
+                <td className={this.setIndexClass(song)} >{index + 1}</td>
               
-                {song.title}: {song.duration} seconds</tr>)}
+                <td>{song.title}: {song.duration} seconds</td></tr>)}
           
            
            </tbody>
@@ -122,6 +125,8 @@ import PlayerBar from './PlayerBar';
          <PlayerBar
           isPlaying={this.state.isPlaying}
           currentSong={this.state.currentSong}
+          currentTime={this.audioElement.currentTime}
+          duration={this.audioElement.duration}
           handleSongClick={() => this.handleSongClick(this.state.currentSong)}
           handlePrevClick={() => this.handlePrevClick()}
           handleNextClick={() => this.handleNextClick()}
