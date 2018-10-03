@@ -134,8 +134,10 @@ componentWillUnmount() {
       const newSeconds =  seconds - (hours * 3600) - (minutes * 60);
       if (seconds === 0) {
         return "-:--"
-      } else {
-        return (hours + ":" + minutes + ":" + newSeconds)
+      } else if (newSeconds < 10) {
+        return (minutes + ":0" + newSeconds)
+      } else if (newSeconds > 9) {
+        return (minutes + ":" + newSeconds)
       }
     }
 
@@ -156,7 +158,7 @@ componentWillUnmount() {
              <col id="song-title-column" />
              <col id="song-duration-column" />
            </colgroup>
-           <tbody>{this.state.album.songs.map((song,index)=><tr className='song'key={index}onClick={()=>this.handleSongClick(song)}><td className={this.setSongClass(song)}></td><td className={this.setIndexClass(song)}>{index+1}</td><td>{song.title}{song.duration}seconds</td></tr>)}
+           <tbody>{this.state.album.songs.map((song,index)=><tr className='song'key={index}onClick={()=>this.handleSongClick(song)}><td className={this.setSongClass(song)}></td><td className={this.setIndexClass(song)}>{index+1}</td><td>{song.title} {this.formatTime(song.duration)} seconds</td></tr>)}
           </tbody>
          
          </table>
